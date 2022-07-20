@@ -1,0 +1,40 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Playfair Display', serif;
+    text-shadow: 0.2rem 0.2rem 0.4rem black;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    height: 100vh;
+    color: black;
+}
+
+#time {
+    font-family: 'Red Hat Mono', monospace;
+    font-size: 6rem;
+    margin-bottom: 0.5rem;
+}
+
+h1 {
+    font-weight: 600;
+    margin-bottom: 2rem;
+}
+
+h2 {
+    font-weight: 400;
+    margin-bottom: 0.3rem;
+    opacity: 0.9;
+}
+
+@media (max-width: 700px) {
+    #time {
+        font-size: 4rem;
+    }
+}
