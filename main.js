@@ -1,8 +1,8 @@
 // DOM elements
 const time = document.getElementById('time'), //comma means you don't have to write const for next line
     greeting = document.getElementById('greeting'),
-    name = document.getElementById('name'),
-    focus = document.getElementById('focus'); //close it off with a semi-colon
+    userName = document.getElementById('user-name'),
+    userFocus = document.getElementById('user-focus'); //close it off with a semi-colon
 
 // Show time function
 showTime = () => {
@@ -39,16 +39,65 @@ setBgGreeting = () => {
         greeting.textContent = 'Good Morning';
     } else if (hour < 18) {
         // afternoon 
-        document.body.style.backgroundImage = "url('../img/evening.jpg')"
+        document.body.style.backgroundImage = "url('../img/afternoon.jpg')"
         greeting.textContent = 'Good Afternoon';
     } else {
         // evening
         document.body.style.backgroundImage = "url('../img/evening.jpg')"
         greeting.textContent = 'Good Evening';
-
     }
 }
+
+// Get Name
+const getName = () => {
+    if(localStorage.getItem('userName') === null) {
+        userName.textContent = '[Enter Name]'
+    } else {
+        userName.textContent = localStorage.getItem('userName');
+    }
+}
+
+// Set Name
+function setName(e){
+    if (e.type === 'keypress') {
+        if(e.which === 13 || e.keycode === 13) {
+            localStorage.setItem('userName', e.target.innerText)
+            userName.blur(); //stops enter press adding a new line and instead moves you out the box
+        }
+    } else {
+        localStorage.setItem('userName', e.target.innerText);
+    }
+}
+
+// Get Focus
+const getFocus = () => {
+    if(localStorage.getItem('focus') === null) {
+        userFocus.textContent = '[Choose focus]'
+    } else {
+        userFocus.textContent = localStorage.getItem('focus');
+    }
+}
+
+// Set Focus
+function setFocus(e){
+    if (e.type === 'keypress') {
+        if(e.which === 13 || e.keycode === 13) {
+            localStorage.setItem('focus', e.target.innerText)
+            userFocus.blur(); //stops enter press adding a new line and instead moves you out the box
+        }
+    } else {
+        localStorage.setItem('focus', e.target.innerText);
+    }
+}
+
+userName.addEventListener('keypress', setName);
+userName.addEventListener('blur', setName);
+userFocus.addEventListener('keypress', setFocus);
+userFocus.addEventListener('blur', setFocus);
 
 // run
 showTime()
 setBgGreeting()
+getName()
+getFocus()
+
