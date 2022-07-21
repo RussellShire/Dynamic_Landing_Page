@@ -4,6 +4,12 @@ const time = document.getElementById('time'), //comma means you don't have to wr
     userName = document.getElementById('user-name'),
     userFocus = document.getElementById('user-focus'); //close it off with a semi-colon
 
+// Show AM/PM
+let showAmPm = true
+
+// Toggles showAmPm
+const amPmClick = () => showAmPm = !showAmPm;
+
 // Show time function
 showTime = () => {
     let today = new Date(),
@@ -14,11 +20,11 @@ showTime = () => {
 // Set AM or PM
 const amPm = hour >= 12 ? 'PM' : 'AM';
 
-// 12 Hour format
-hour = hour % 12 || 12;
+// 12 Hour format on showAmPm = true -> toggled by eventlistener of click on time
+showAmPm ? hour = hour % 12 || 12 : ''
 
 // Output time
-time.innerHTML = `${hour}<span>:</span>${addZero(min)}<span>:</span>${addZero(sec)}${amPm.toLowerCase()}`
+time.innerHTML = `${hour}<span>:</span>${addZero(min)}<span>:</span>${addZero(sec)}${showAmPm ? amPm : ''}`
 
 setTimeout(showTime, 1000);
 }
@@ -94,6 +100,7 @@ userName.addEventListener('keypress', setName);
 userName.addEventListener('blur', setName);
 userFocus.addEventListener('keypress', setFocus);
 userFocus.addEventListener('blur', setFocus);
+time.addEventListener('click', amPmClick);
 
 // run
 showTime()
